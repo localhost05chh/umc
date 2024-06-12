@@ -56,28 +56,7 @@ public class MemberCommandServiceImpl implements MemberCommandService{
         return memberRepository.save(newMember);
     }
 
-    @Override
-    @Transactional
-    public Review createReview(ReviewRequestDTO.CreateDTO request, Long storeId, Long memberId) {
 
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
-        Store store = storeRepository.findById(storeId).orElseThrow(() -> new GeneralException(ErrorStatus.STORE_ID_NOT_FOUND));
 
-        Review newReview = ReviewConverter.toReview(request, store, member);
-
-        return reviewRepository.save(newReview);
-    }
-
-    @Override
-    @Transactional
-    public MemberMission createMission(Long missionId, Long memberId) {
-
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
-        Mission mission = missionRepository.findById(missionId).orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
-
-        MemberMission newChallenge = MemberMissionConverter.toMemberMission(mission, member);
-
-        return memberMissionCategoryRepository.save(newChallenge);
-    }
 
 }

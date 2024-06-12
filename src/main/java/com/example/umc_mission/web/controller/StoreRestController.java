@@ -6,6 +6,7 @@ import com.example.umc_mission.converter.StoreConverter;
 import com.example.umc_mission.domain.Review;
 import com.example.umc_mission.domain.Store;
 import com.example.umc_mission.service.memberService.MemberCommandServiceImpl;
+import com.example.umc_mission.service.reviewService.ReviewCommandServiceImpl;
 import com.example.umc_mission.service.storeService.StoreService;
 import com.example.umc_mission.web.dto.reviewDTO.ReviewRequestDTO;
 import com.example.umc_mission.web.dto.reviewDTO.ReviewResponseDTO;
@@ -22,13 +23,14 @@ import org.springframework.web.bind.annotation.*;
 public class StoreRestController {
 
     private final StoreService storeService;
-    private final MemberCommandServiceImpl memberCommandServiceImpl;
+
+    private final ReviewCommandServiceImpl reviewCommandService;
 
     @PostMapping("/")
     public ApiResponse<StoreResponseDTO.JoinStoreResultDTO> joinStore(@RequestParam Long regionId,
-                                                                      @RequestBody StoreRequestDTO.JoinStoreDTO request) {
+                                                                      @RequestBody @Valid StoreRequestDTO.JoinStoreDTO request) {
         Store newStore = storeService.joinStore(request, regionId);
-        return ApiResponse.onSuccess(StoreConverter.toJoinStoreResultDTO(newStore));
+        return ApiResponse.onSuccess(StoreConverter.toStoreResultDTO(newStore));
     }
 
     @PostMapping("/{storeId}/reviews")
@@ -36,7 +38,7 @@ public class StoreRestController {
                                                                  @PathVariable Long storeId,
                                                                  @RequestParam Long memberId){
 
-        Review newReview =  memberCommandServiceImpl.createReview(request, storeId, memberId);
+        Review newReview =  reviewCommandService.createReview(request, storeId, memberId);
         return ApiResponse.onSuccess(ReviewConverter.toCreateResultDTO(newReview));
     }
 }

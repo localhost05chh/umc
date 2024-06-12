@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class StoreConverter {
 
-    public static StoreResponseDTO.JoinStoreResultDTO toJoinStoreResultDTO(Store store) {
+    public static StoreResponseDTO.JoinStoreResultDTO toStoreResultDTO(Store store) {
         return StoreResponseDTO.JoinStoreResultDTO.builder()
                 .storeId(store.getId())
                 .createdAt(LocalDateTime.now())

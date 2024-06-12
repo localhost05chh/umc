@@ -11,9 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface MemberCommandService {
     Member joinMember(MemberRequestDTO.JoinDTO request);
 
-    @Transactional
-    Review createReview(ReviewRequestDTO.CreateDTO request, Long storeId, Long memberId);
 
-    @Transactional
-    MemberMission createMission(Long missionId, Long memberId);
 }

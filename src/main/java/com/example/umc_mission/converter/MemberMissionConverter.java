@@ -3,14 +3,14 @@ package com.example.umc_mission.converter;
 import com.example.umc_mission.domain.Member;
 import com.example.umc_mission.domain.Mission;
 import com.example.umc_mission.domain.mapping.MemberMission;
-import com.example.umc_mission.web.dto.memberDTO.MemberMissionResponseDTO;
+import com.example.umc_mission.web.dto.MissionResponseDTO;
 
 
 import java.time.LocalDateTime;
 
 public class MemberMissionConverter {
-    public static MemberMissionResponseDTO.ChallengeResultDTO toMissionResultDTO(MemberMission memberMission){
-        return MemberMissionResponseDTO.ChallengeResultDTO.builder()
+    public static MissionResponseDTO.ChallengeResultDTO toMissionResultDTO(MemberMission memberMission){
+        return MissionResponseDTO.ChallengeResultDTO.builder()
                 .memberMissionId(memberMission.getId())
                 .createAt(LocalDateTime.now())
                 .build();
